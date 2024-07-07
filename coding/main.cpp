@@ -7,30 +7,36 @@
 // Function to calculate the distance between two points
 float distance(sf::Vector2f point1, sf::Vector2f point2)
 {
-    return std::sqrt((point2.x - point1.x) * (point2.x - point1.x) + 
+    return std::sqrt((point2.x - point1.x) * (point2.x - point1.x) +
                      (point2.y - point1.y) * (point2.y - point1.y));
 }
 
 // Enemy class
-class Enemy {
+class Enemy
+{
 public:
-    Enemy(sf::Texture& texture, const std::vector<sf::Vector2f>& path, sf::Vector2f scale)
-        : sprite(texture), path(path), currentWaypoint(0), speed(100.0f) {
-        if (!path.empty()) {
+    Enemy(sf::Texture &texture, const std::vector<sf::Vector2f> &path, sf::Vector2f scale)
+        : sprite(texture), path(path), currentWaypoint(0), speed(100.0f)
+    {
+        if (!path.empty())
+        {
             sprite.setPosition(path[0]);
         }
         sprite.setScale(scale); // Set the scale for the enemy sprite
     }
 
-    void update(float deltaTime) {
-        if (currentWaypoint < path.size()) {
+    void update(float deltaTime)
+    {
+        if (currentWaypoint < path.size())
+        {
             sf::Vector2f position = sprite.getPosition();
             sf::Vector2f target = path[currentWaypoint];
             sf::Vector2f direction = target - position;
             float distanceToNext = distance(position, target);
 
             // Normalize direction vector and move towards target
-            if (distanceToNext > 0) {
+            if (distanceToNext > 0)
+            {
                 direction /= distanceToNext;
             }
 
@@ -38,13 +44,15 @@ public:
             sprite.move(direction * speed * deltaTime);
 
             // Check if the enemy has reached the current waypoint
-            if (distance(position, target) < speed * deltaTime) {
+            if (distance(position, target) < speed * deltaTime)
+            {
                 currentWaypoint++;
             }
         }
     }
 
-    void draw(sf::RenderWindow& window) {
+    void draw(sf::RenderWindow &window)
+    {
         window.draw(sprite);
     }
 
@@ -62,7 +70,7 @@ int main()
     // Load background texture
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
-    if (!backgroundTexture.loadFromFile("C:\\Users\\Administrator\\Desktop\\New folder\\valjdaZadnjaRepo\\images\\terrain_with_curve.png"))
+    if (!backgroundTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\terrain_with_curve.png"))
     {
         std::cerr << "Error loading background image!\n";
         return -1;
@@ -78,13 +86,13 @@ int main()
     // Load tower stand texture and set positions
     sf::Texture standTexture;
     std::vector<sf::Sprite> standSprites;
-    if (!standTexture.loadFromFile("C:\\Users\\Administrator\\Desktop\\New folder\\valjdaZadnjaRepo\\images\\tower_stand.png"))
+    if (!standTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\tower_stand.png"))
     {
         std::cerr << "Error loading stand image!\n";
         return -1;
     }
-    sf::Vector2f positions[] = { {500, 215}, {440, 570}, {930, 660}, {930, 970} };
-    for (auto& position : positions)
+    sf::Vector2f positions[] = {{500, 215}, {440, 570}, {930, 660}, {930, 970}};
+    for (auto &position : positions)
     {
         sf::Sprite standSprite;
         standSprite.setTexture(standTexture);
@@ -98,12 +106,11 @@ int main()
         {0, 324},
         {630, 324},
         {630, 775},
-        {1920, 775}
-    };
+        {1920, 775}};
 
     // Load enemy texture and create enemy
     sf::Texture enemyTexture;
-    if (!enemyTexture.loadFromFile("C:\\Users\\Administrator\\Desktop\\New folder\\valjdaZadnjaRepo\\images\\enemy.png"))
+    if (!enemyTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\enemy.png"))
     {
         std::cerr << "Error loading enemy image!\n";
         return -1;
@@ -128,9 +135,9 @@ int main()
         enemy.update(deltaTime);
 
         // Draw everything
-        window.clear(); 
-        window.draw(backgroundSprite); 
-        for (auto& standSprite : standSprites)
+        window.clear();
+        window.draw(backgroundSprite);
+        for (auto &standSprite : standSprites)
             window.draw(standSprite);
         enemy.draw(window);
         window.display();
