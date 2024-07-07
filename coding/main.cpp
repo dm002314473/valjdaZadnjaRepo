@@ -70,7 +70,7 @@ int main()
     // Load background texture
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
-    if (!backgroundTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\terrain_with_curve.png"))
+    if (!backgroundTexture.loadFromFile("images/terrain_with_curve.png"))
     {
         std::cerr << "Error loading background image!\n";
         return -1;
@@ -86,7 +86,7 @@ int main()
     // Load tower stand texture and set positions
     sf::Texture standTexture;
     std::vector<sf::Sprite> standSprites;
-    if (!standTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\tower_stand.png"))
+    if (!standTexture.loadFromFile("images/tower_stand.png"))
     {
         std::cerr << "Error loading stand image!\n";
         return -1;
@@ -110,7 +110,7 @@ int main()
 
     // Load enemy texture and create enemy
     sf::Texture enemyTexture;
-    if (!enemyTexture.loadFromFile("C:\\Users\\Duje\\Desktop\\valjdaZadnja\\images\\enemy.png"))
+    if (!enemyTexture.loadFromFile("images/enemy.png"))
     {
         std::cerr << "Error loading enemy image!\n";
         return -1;
